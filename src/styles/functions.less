@@ -1,0 +1,317 @@
+// ###################### FUNCTIONS ######################
+
+@legacy-support: false;
+
+//* =========================== CONFIG =========================== */
+
+.disable-mobile-webkit-highlights(){
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+//* =========================== LAYOUT =========================== */
+.inline(){
+  display: inline-block;
+  margin-right: -4px;
+}
+.inline( @text-align: left ){
+  display: inline-block;
+  margin-right: -4px;
+  text-align: @text-align;
+}
+// http://dev.w3.org/csswg/css-flexbox/#flex-grow
+.flex(  ){
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-flow( @flex-flow: row nowrap ){
+  -moz-flex-flow: @flex-flow;
+  -webkit-flex-flow: @flex-flow;
+  flex-flow: @flex-flow;
+}
+.flex-align-items( @align-items: stretch ){
+  -moz-align-items: @align-items;
+  -webkit-align-items: @align-items;
+  align-items: @align-items;
+}
+.flex-justify-content( @justify-content: flex-start ){
+  -moz-justify-content: @justify-content;
+  -webkit-justify-content: @justify-content;
+  justify-content: @justify-content;
+}
+.flex-align-content( @align-content: stretch ){
+  -moz-align-content: @align-content;
+  -webkit-align-content: @align-content;
+  align-content: @align-content;
+}
+.flex-item( @flex: initial ){
+  -moz-flex: @flex;
+  -webkit-flex: @flex;
+  flex: @flex;
+}
+.flex-item-order( @order: 0 ){
+  -moz-order: @order;
+  -webkit-order: @order;
+  order: @order;
+}
+.flex-item-align-self( @align-self: auto ){
+  -moz-align-self: @align-self;
+  -webkit-align-self: @align-self;
+  align-self: @align-self;
+}
+
+.min-height( @height ){
+  min-height: @height;
+  height: auto !important;
+  height: @height;
+}
+.page-break(){
+  page-break-before: always;
+}
+
+.clearfix(){
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+.clearfix() when ( @legacy-support ){
+  &:before, &:after {
+    content: "";
+    display: table
+  }
+  &:after { clear: both }
+  zoom: 1;
+}
+
+
+//* =========================== DISPLAY =========================== */
+
+// ========== visibility  ==========
+.opacity( @o: .7 ) when not( @legacy-support ){
+  @mso: (@o * 100);
+  filter: ~"alpha(opacity=@{mso})";
+  opacity: @o;
+}
+.opacity( @o: .7 ) when ( @legacy-support ){
+  @mso: (@o * 100);
+  filter: ~"alpha(opacity=@{mso})"; // internet explorer
+  -khtml-opacity: @o;      // khtml, old safari
+  -moz-opacity: @o;       // mozilla, netscape
+  opacity: @o;           // fx, safari, opera
+}
+
+
+// ========== background ==========
+.background-clip(@argument: padding-box) {
+  -moz-background-clip: @argument;
+  -webkit-background-clip: @argument;
+  background-clip: @argument;
+}
+
+.background-cover( @src ) when not( @legacy-support ){
+  background: url(@src) no-repeat center center fixed;
+  background-size: cover;
+}
+.background-cover( @src ) when ( @legacy-support ){
+  background: url(@src) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.gradient( @from, @to, @angle: to top ) when not( @legacy-support ){
+  background: @to;
+  background-image: linear-gradient(@angle, @from, @to);
+}
+.gradient( @from, @to, @angle: top ) when ( @legacy-support ){
+//  background: @to;
+//  background-image: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
+  background-image: -webkit-linear-gradient(@angle, @from, @to);
+  background-image: -moz-linear-gradient(@angle, @from, @to);
+  background-image: -ms-linear-gradient(@angle, @from, @to);
+  background-image: -o-linear-gradient(@angle, @from, @to);
+  background-image: linear-gradient(@angle, @from, @to);
+}
+// doc: https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
+.radial-gradient( ... ){
+//  background-image: -webkit-gradient(radial, left top, left bottom, from(@from), to(@to));
+  background-image: -webkit-radial-gradient(@arguments);
+  background-image: -moz-radial-gradient(@arguments);
+  background-image: -ms-radial-gradient(@arguments);
+  background-image: -o-radial-gradient(@arguments);
+  background-image: radial-gradient(@arguments);
+}
+
+
+// ========== IMAGE PRELOAD ==========
+.preload-img( @src ){
+  background: url(@src) no-repeat;
+}
+
+// ========== box sizing ==========
+.box-sizing( @sizing: border-box ){
+  -webkit-box-sizing: @sizing;
+  -moz-box-sizing: @sizing;
+  box-sizing: @sizing;
+}
+
+// ========== rounded corners ==========
+.rounded( @radius: 5px ){
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+// ========== box shadow ==========
+.box-shadow( @args: 0 0 5px black ){
+  -webkit-box-shadow: @args;
+  -moz-box-shadow: @args;
+  box-shadow: @args;
+}
+.shadow-pool( @x: -1px, @y: -1px, @blur: 2px, @color: gray, @light: 50% ){
+  -webkit-box-shadow: @x @y @blur darken(@color, @light), inset @x @y @blur, lighten(@color, @light);
+  -moz-box-shadow: @x @y @blur darken(@color, 100% - @light), inset @x @y @blur, lighten(@color, 100% - @light);
+  box-shadow: @x @y @blur darken(@color, 100% - @light), inset @x @y @blur, lighten(@color, 100% - @light);
+}
+
+// ========== transform ==========
+
+.transform( ... ) {
+  -webkit-transform: @arguments;
+  -moz-transform: @arguments;
+  -o-transform: @arguments;
+  -ms-transform: @arguments;
+  transform: @arguments;
+}
+
+.rotate( @deg:5deg ) {
+  .transform(rotate(@deg));
+}
+
+.scale( @ratio:1.5 ) {
+  .transform(scale(@ratio));
+}
+
+.translate(@x:0, @y:0) {
+  .transform(translate(@x, @y));
+}
+
+// ========== transitions ==========
+.transition(@props: all, @duration:0.5s, @ease:linear) {
+  -webkit-transition: @props @duration @ease;
+  -moz-transition: @props @duration @ease;
+  -ms-transition: @props @duration @ease;
+  -o-transition: @props @duration @ease;
+  transition: @props @duration @ease;
+}
+.transition( ... ) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -ms-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+.transition-duration( @duration: 0.5s ) {
+  -moz-transition-duration: @duration;
+  -webkit-transition-duration: @duration;
+  -o-transition-duration: @duration;
+  transition-duration: @duration;
+}
+
+.glow( @duration: 0.5s ){
+  .transition(all, @duration, ease-in-out)
+}
+
+//* =========================== TEXT =========================== */
+.text-wrap(){
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+.word-wrap() when ( @legacy-support ){
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.word-wrap(){
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.text-shadow( @color: black ){
+  text-shadow: 0 0 1px darken(@color, 10%);
+}
+
+.user-select(@argument: none) {
+  -webkit-user-select: @argument;
+  -moz-user-select: @argument;
+  -ms-user-select: @argument;
+  user-select: @argument;
+}
+
+.condensed( @size: 1.2em/1.0em ){
+  font-style: italic;
+  font-variant: small-caps;
+  font-weight: 700;
+  font-size: @size;
+}
+
+
+.columns( @number: 3, @gap: 10px, @rule: none ){
+  text-align: justify;
+  -moz-column-count: @number;
+  -moz-column-gap: @gap;
+  -moz-column-rule: @rule;
+  -webkit-column-count: @number;
+  -webkit-column-gap: @gap;
+  -webkit-column-rule: @rule;
+  column-count: @number;
+  column-gap: @gap;
+  column-rule: @rule;
+}
+.image-replacement(){
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// ========== FONTS ==========
+.font-face-src( @src, all ){
+  src: url('@{src}.eot');
+  src: url('@{src}.eot?#iefix') format('embedded-opentype'),
+  url('@{src}.woff') format('woff'),
+  url('@{src}.ttf') format('truetype'),
+  url('@{src}.svg#FontName') format('svg');
+}
+.font-face-src( @src, eot ){
+  src: url('@{src}.eot');
+  src: url('@{src}.eot?#iefix') format('embedded-opentype');
+}
+.font-face-src( @src, woff ){
+  src: url('@{src}.woff') format('woff');
+}
+.font-face-src( @src, ttf ){
+  src: url('@{src}.ttf') format('truetype');
+}
+.font-face-src( @src, svg ){
+  src: url('@{src}.svg#FontName') format('svg');
+}
+
+.font-face( @src, @name, @formats: all, @style: normal, @weight: normal ){
+  @font-face {
+    font-family: @name;
+    .font-face-src(@src, @formats);
+    font-style: @style;
+    font-weight: @weight;
+  }
+}

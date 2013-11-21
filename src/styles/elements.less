@@ -1,0 +1,328 @@
+// source of grouping: http://joshduck.com/periodic-table.html
+
+*{
+  .box-sizing();
+}
+
+
+//::-moz-selection{  }
+//::-webkit-selection{  }
+//::selection {  }
+
+//* =========================== ROOT =========================== */
+
+html{}
+
+//* =========================== META =========================== */
+
+head{}
+title{}
+meta{}
+base{}
+link{}
+noscript{}
+style{}
+script{}
+
+//* =========================== DOCUMENT SECTIONS =========================== */
+
+body{
+}
+
+// Contains elements grouped by theme, for example a chapter or tab box
+section{}
+
+// Navigation or introductory elements for the current section
+header{}
+// Contains a collection of links
+nav{}
+
+// Content related to surrounding elements that doesn't belong inline, such as a advertising or quotes
+aside{}
+
+// Section of the page content, such as a blog or forum post
+article{}
+// Contact information for the current article
+address{}
+
+// Footer of the current section
+footer{}
+
+// Collection of headings for the current section. The highest ranked heading represents the group in the document outline
+hgroup{}
+h1{}
+h2{}
+h3{}
+h4{}
+h5{}
+h6{}
+
+//* =========================== GROUPING CONTENT =========================== */
+
+// Container with no semantic meaning
+div{}
+// Text that is preformatted in the HTML code
+pre{}
+// Line break
+br{}
+// Paragraph content
+p{}
+// Quote from another source
+blockquote{}
+// Thematic break within a paragraph
+hr{}
+// Ordered list
+ol{}
+// List of term-description pairs
+dl{}
+// Caption for a figure
+figcaption{}
+// Unordered list
+ul{}
+// Term which will be described
+dt{}
+// Contains elements related to single concept, such as an illustration or code example
+figure{}
+// List item
+li{}
+// Description for the preceding term
+dd{}
+
+//* =========================== EMBED =========================== */
+
+// Hyperlink area in an image map
+area{}
+// Image map for adding hyperlinks to parts of an image
+map{}
+// Nested browser frame
+iframe{}
+// Reference to non-HTML content
+embed{}
+// External resource such as an image, iframe or plugin
+object{}
+// Parameters for the parent object
+param{}
+// Alternative sources for parent video or audio elements
+source{}
+// Specifies external timing track for media elements
+track{}
+audio{}
+video{}
+canvas{}
+img{}
+
+//* =========================== INTERACTIVE ELEMENTS =========================== */
+
+// Set of commands
+menu{}
+// Command the user can perform, such as publishing an article
+command{}
+// Caption of a details element
+summary{}
+// Contains additional information, such as the contents of an accordian view
+details{}
+
+//* =========================== TEXT LEVEL =========================== */
+
+// Container with no semantic meaning
+span{}
+// Hyperlink
+a{
+  font: inherit;
+  &:link {  }
+  &:visited {
+  }
+  &:hover {
+  }
+  &:active {
+  }
+  &:focus {
+  }
+  &[href^="http://"] {}
+  &[href^="https://"] {}
+  &[href^="ftp://"] {}
+  &[href^="mailto:"] {}
+  &[href$=".pdf"] {}
+}
+// Annotation of preceding text
+rt{}
+// Term being defined by the parent section
+dfn{}
+// Text that should be emphasised
+em{}
+// Text in a alternate voice or mood, such as a technical term
+i{}
+// An aside, such as fine print
+small{}
+// Text that has been inserted during document editing
+ins{}
+// Text that is outdated or no longer accurate
+s{}
+// Contains semantically meaningless markup for browsers that don't understand ruby annotations
+rp{}
+// Abbreviation or acronym
+abbr{}
+// Time defined in a machine readable format
+time{}
+// Stylistically separated text of equal importance, such as a product name
+b{}
+// Text that is important
+strong{}
+// Text that has been removed during document editing
+del{}
+// Example input (usually keyboard) for a program
+kbd{}
+// Quoted text
+q{}
+// Mathematical or programming variable.
+var{}
+// Subscript text
+sub{}
+// Text highlighted for referencing elsewhere
+samp{}
+// Superscript text
+sup{}
+// Text highlighted for referencing elsewhere
+mark{}
+// Text that is separated from directional formatting of its surroundings
+bdi{}
+// Opportunity for a line break
+wbr{}
+// Title of a referenced piece of work
+cite{}
+// Contains text with annotations, such as pronounciation hints. Commonly used in East Asian text
+ruby{}
+// Defines directional formatting for content
+bdo{}
+// Fragment of code
+code{}
+
+//* =========================== FORM =========================== */
+
+// Form
+form{}
+
+// Set of form controls grouped by theme
+fieldset{}
+// Define a name for a fieldset
+legend{}
+
+// Control for selecting from multiple options
+select{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+// Group of option
+optgroup{}
+// Single option within a select control
+option{}
+
+// Caption for a form control
+label{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// Control for entering a numeric value in a known range
+meter{}
+
+// Define sets of options
+datalist{}
+
+// Generic form input
+input{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// text inputs
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=number],
+input[type=tel],
+input[type=url],
+input[type=date],
+input[type=month],
+input[type=week],
+input[type=datetime],
+input[type=datetime-local],
+textarea{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// Contains the results of a calculation
+output{}
+// Generates private-public key pairs
+keygen{}
+
+// Multiline free-form text input
+textarea{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// A button
+button{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// clickables
+button,
+input[type=submit],
+input[type=button],
+input[type=reset]{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// other inputs
+input[type=color]{}
+input[type=range]{}
+input[type=image]{
+}
+
+// radio
+input[type=radio]{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// checkbox
+input[type=checkbox]{
+  &:hover{}
+  &:focus{}
+  &:active{}
+}
+
+// file
+input[type=file]{
+}
+
+// Control for displaying progress of a task
+progress{}
+
+
+//* =========================== TABULAR DATA =========================== */
+
+col{}
+table{}
+colgroup{}
+tr{}
+caption{}
+td{}
+th{}
+tbody{}
+thead{}
+tfoot{}

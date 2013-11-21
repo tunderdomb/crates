@@ -1,0 +1,5 @@
+NameError: .box-sizing is undefined in D:\projects\crates\src\styles\elements.less on line 4, column 3:
+3 *{
+4   .box-sizing();
+5 }
+

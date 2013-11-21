@@ -1,0 +1,42 @@
+@import "functions";
+// ###################### UTILITY ######################
+
+.inline {
+  .inline();
+}
+
+.inline-center {
+  .inline(center);
+}
+
+.block { display: block }
+
+.centered {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.centered-content {
+  text-align: center;
+}
+
+.hidden { display: none }
+
+.transparent {
+  .opacity(0)
+}
+
+.invisible {
+  visibility: hidden;
+  .transparent;
+}
+
+.rounded {
+  .rounded();
+}
+
+.shadowed { .box-shadow() }
+
+.shadow-pool { .shadow-pool() }
+
+.wrapped-text { .text-wrap() }
