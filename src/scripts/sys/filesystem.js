@@ -1,6 +1,6 @@
 !function ( f ){
-  crates.sys.local = f(window, document, {})
-}(function (win, doc, sys){
+  crates.filesystem = f(window, document, {})
+}(function (win, doc, filesystem){
   var local
     , globalConfig
     , localsys = {}
@@ -927,5 +927,7 @@
 
   localsys.supported = !!(win.requestFileSystem || win.webkitRequestFileSystem)
 
-  sys.localsys = localsys
+  filesystem.localsys = localsys
+
+  return filesystem
 });

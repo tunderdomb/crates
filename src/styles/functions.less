@@ -126,11 +126,11 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.gradient( @from, @to, @angle: to top ) when not( @legacy-support ){
+.linear-gradient( @from, @to, @angle: to top ) when not( @legacy-support ){
   background: @to;
   background-image: linear-gradient(@angle, @from, @to);
 }
-.gradient( @from, @to, @angle: top ) when ( @legacy-support ){
+.linear-gradient( @from, @to, @angle: top ) when ( @legacy-support ){
 //  background: @to;
 //  background-image: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
   background-image: -webkit-linear-gradient(@angle, @from, @to);

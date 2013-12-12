@@ -1,6 +1,6 @@
 !function ( f ){
-  f(window, document, sistem)
-}(function (win, doc, sis){
+  crates.download = f()
+}(function(){
   function buildBlob( data, mime ){
     mime = mime || defaultMime
     if( Blob ) return new Blob([data], {type: mime})
@@ -54,7 +54,7 @@
    * name: String the name of the file to download
    * mime: String the mime type of the file
    * */
-  sis.download = function( data, name, mime ){
+  return function( data, name, mime ){
     return download(data, name, mime)
   }
 });

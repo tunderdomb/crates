@@ -1,11 +1,10 @@
 !function ( f ){
   crates.sys = f(window, document, {})
 }(function ( win, doc, sys ){
-
   function noop(){}
 
   function extend( o, e ){
-    for( var prop in e ){
+    for ( var prop in e ) {
       o[prop] = e[prop]
     }
     return o
@@ -16,7 +15,7 @@
     , GB = 1024 * MB
     , TB = 1024 * GB
 
-  sys.extend = function( o ){
+  sys.extend = function ( o ){
     extend(sys, o)
   }
 
@@ -29,14 +28,14 @@
     /** converts a value from a unit to another
      * the unit is assumed to be in bytes, if not provided
      * */
-    convert: function( bytes, toUnit, fromUnit ){
-      bytes = bytes/(fromUnit||1)
+    convert: function ( bytes, toUnit, fromUnit ){
+      bytes = bytes / (fromUnit || 1)
     },
     /**
      * calculates the dynamic representation of a storage unit according to unit tiers
      * if precision if given, the return value will be rounded according to it
      * */
-    dynamic: function( bytes, precision ){
+    dynamic: function ( bytes, precision ){
       precision = precision || 1
       return bytes > TB ? ((bytes / TB) * precision >> 0) / precision + "TB"
         : bytes > GB ? ((bytes / GB) * precision >> 0) / precision + "GB"
@@ -79,7 +78,7 @@
       }
       reader.readAsDataURL(file)
     },
-    readAsJSON: function( file, done ){
+    readAsJSON: function ( file, done ){
       var reader = new FileReader()
       reader.onloadend = function ( e ){
         reader.onloadend = null
@@ -98,45 +97,45 @@
   }
 
   sys.path = {
-    concat: function (  ){
+    concat: function (){
       var path = arguments[0].toString().replace(/\/$/, "")
       for ( var i = 0, l = arguments.length; ++i < l; ) {
         path += "/" + arguments[i].toString().replace(/^\/|\/$/g, "")
       }
       return path
     },
-    getDir: function( path ){
+    getDir: function ( path ){
       return path.replace(/^(\/?.*)\/.*?$/, "$1")
     },
-    getFileName: function( path ){
+    getFileName: function ( path ){
       return path.replace(/^(?:.*\/)?(.+)\..+$/, "$1")
     },
-    getParentDir: function( path ){
+    getParentDir: function ( path ){
       return path.replace(/^(?:.*\/)?(.+)\..+$/, "$1")
     },
-    replaceDir: function( path, newPath ){
+    replaceDir: function ( path, newPath ){
       return path.replace(/(?:^.*\/|^)(.*?\.\w+)$/, newPath.replace(/\/$/, "") + "/$1")
     },
-    renameFile: function( path, newName ){
+    renameFile: function ( path, newName ){
       return path.replace(/(^.*\/|^).*(\.\w+)/, "$1" + newName + "$2")
     },
-    stripExtension: function( path ){
+    stripExtension: function ( path ){
       return path.replace(/^(.+)(\.\w+)$/, "$1")
     }
   }
 
   sys.extend({
-    isImage: function( pathOrFile ){
+    isImage: function ( pathOrFile ){
       return typeof pathOrFile == "string"
         ? /\.(jpe?g|png|gif)$/i.test(pathOrFile)
         : /image.*/.test(pathOrFile.type)
     },
-    isAudio: function( pathOrFile ){
+    isAudio: function ( pathOrFile ){
       return typeof pathOrFile == "string"
         ? /\.(jpe?g|png|gif)$/i.test(pathOrFile)
         : /image.*/.test(pathOrFile.type)
     },
-    isVideo: function( pathOrFile ){
+    isVideo: function ( pathOrFile ){
       return typeof pathOrFile == "string"
         ? /\.(jpe?g|png|gif)$/i.test(pathOrFile)
         : /image.*/.test(pathOrFile.type)
@@ -233,7 +232,7 @@
    * done: function
    * throttle: Number in millisecs to throttle each tasks execution
    * */
-  sys.batch = function batch( taskArray, process, done, throttle ){
+  sys.batch = function batch( taskArray, process, done ){
     function progress( err, errData ){
       err === false && errData && failed.push(errData)
       ++loaded == toLoad && done && done()
@@ -254,17 +253,7 @@
     i = -1
 
     if ( !toLoad ) return done && done()
-
-    if ( throttle ) {
-      while ( ++i < toLoad ) {
-        setTimeout((function ( i ){
-          return function ( task ){
-            process(task, progress, i)
-          }
-        }(i)), throttle)
-      }
-    }
-    else while ( ++i < toLoad ) {
+    while ( ++i < toLoad ) {
       if ( process(taskArray[i], progress, i) === false ) {
         failed.push(taskArray[i])
       }

@@ -1,6 +1,6 @@
 !function ( f ){
-  f(window, document, crates.sys)
-}(function (win, doc, sis){
+  crates.localStorage = f()
+}(function (){
 
   function resolveNs( ns, obj ){
     ns = ns.split(".")
@@ -37,8 +37,7 @@
     }
   }
 
-  sis.localStorage = {
-    isSupported: true,
+  return {
     get: function( accessor ){
       if ( /\./.test(accessor) ) {
         var nameSpace = getNameSpace(accessor)

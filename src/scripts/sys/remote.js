@@ -1,6 +1,6 @@
 !function ( f ){
-  f(window, document, sistem)
-}(function (win, doc, sis){
+  crates.remote = f(window, document, {})
+}(function (win, doc, remote){
 
   function ajax( options ){
     var http =  new XMLHttpRequest()
@@ -20,7 +20,7 @@
     if( options.responseType ) http.responseType = options.responseType
     http.send(options.data)
   }
-  sis.http = {
+  remote.http = {
     get: function( options ){
       var args
       if( typeof options == "string" ){
@@ -47,4 +47,5 @@
     }
   }
 
+  return remote
 });
